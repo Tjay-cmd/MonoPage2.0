@@ -1,0 +1,10 @@
+{
+  "name": "MonoPage Job Board",
+  "short_name": "Job Board",
+  "description": "View and manage your assigned jobs",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#4f46e5",
+  "icons": []
+}

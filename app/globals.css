@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Force dark text in all inputs/textareas across the dashboard */
+input,
+textarea,
+select {
+  color: #171717;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

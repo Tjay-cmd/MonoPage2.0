@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>FlowFix | Professional Plumbers</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Font: Inter (clean, modern) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- GLOBAL RESET & VARIABLES ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --deep-blue: #0b3b5c;     /* trustworthy, stable */
+      --aqua-bright: #2ac9fa;   /* fresh water / accent */
+      --soft-white: #f9fcff;
+      --charcoal: #1e2b37;
+      --warm-gray: #f0f4f8;
+      --shadow-sm: 0 10px 30px -10px rgba(0,0,0,0.08);
+      --shadow-hover: 0 25px 40px -14px rgba(0,80,120,0.18);
+      --border-radius: 28px;
+      --border-radius-sm: 16px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--soft-white);
+      color: var(--charcoal);
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ---------- TYPOGRAPHY & UTILITY ---------- */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--deep-blue);
+      color: white;
+      font-weight: 600;
+      padding: 16px 38px;
+      border-radius: 60px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 16px -6px rgba(11,59,92,0.2);
+      letter-spacing: 0.3px;
+      font-size: 1.05rem;
+    }
+
+    .btn i {
+      margin-right: 8px;
+    }
+
+    .btn:hover {
+      background: #0e4b6e;
+      transform: translateY(-4px);
+      box-shadow: 0 18px 30px -8px rgba(11,59,92,0.35);
+    }
+
+    .btn-accent {
+      background: var(--aqua-bright);
+      color: #0a2a3b;
+      box-shadow: 0 8px 16px -6px rgba(42,201,250,0.3);
+    }
+    .btn-accent:hover {
+      background: #10c0ff;
+      color: #0a1e28;
+    }
+
+    .section-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--deep-blue);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .section-subhead {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #3c5a6a;
+      max-width: 700px;
+      margin-bottom: 48px;
+    }
+
+    /* ---------- HEADER & NAVIGATION ---------- */
+    header {
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.9);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo i {
+      font-size: 2.2rem;
+      color: var(--aqua-bright);
+      background: var(--deep-blue);
+      padding: 12px;
+      border-radius: 16px;
+    }
+    .logo span {
+      font-weight: 800;
+      font-size: 1.7rem;
+      color: var(--deep-blue);
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 48px;
+      font-weight: 600;
+      color: #1e3b4a;
+    }
+    .nav-links a {
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 6px;
+    }
+    .nav-links a:hover {
+      border-bottom-color: var(--aqua-bright);
+      color: var(--deep-blue);
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      padding: 40px 0 80px;
+      background: linear-gradient(145deg, #ffffff 0%, #f3faff 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-badge {
+      background: rgba(42,201,250,0.12);
+      color: var(--deep-blue);
+      display: inline-block;
+      padding: 8px 22px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(42,201,250,0.3);
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--deep-blue);
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-highlight {
+      color: var(--aqua-bright);
+      border-bottom: 4px solid var(--deep-blue);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #2c4a5e;
+      margin-bottom: 32px;
+      max-width: 90%;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 48px;
+    }
+    .stat-item h3 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--deep-blue);
+      line-height: 1;
+    }
+    .stat-item p {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+      color: #3c6577;
+      font-weight: 500;
+    }
+
+    .hero-image {
+      background: url('https://placecats.com/600/400?random=1'), linear-gradient(145deg, #d4ecff, #b0e0ff);
+      background-size: cover;
+      background-position: center;
+      height: 420px;
+      border-radius: 38px;
+      box-shadow: var(--shadow-hover);
+      position: relative;
+      background-blend-mode: overlay;
+    }
+    /* fallback if image doesn't show – we use a water-like abstract */
+    .hero-image {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400"><rect width="600" height="400" fill="%232ac9fa" opacity="0.1"/><path d="M0 250 Q150 180 300 250 T600 250 L600 400 L0 400 Z" fill="%230b3b5c" opacity="0.3"/><circle cx="450" cy="120" r="70" fill="%23ffffff" opacity="0.3"/><circle cx="200" cy="200" r="110" fill="%23ffffff" opacity="0.2"/><path d="M80 300 L150 230 L230 300 Z" fill="%232ac9fa" opacity="0.5"/></svg>');
+      background-size: cover;
+    }
+
+    /* ---------- SERVICES SECTION ---------- */
+    .services {
+      padding: 100px 0;
+      background: white;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 40px;
+      margin-top: 20px;
+    }
+
+    .service-card {
+      background: white;
+      padding: 40px 28px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+      border: 1px solid rgba(0,0,0,0.02);
+      text-align: center;
+    }
+
+    .service-card:hover {
+      transform: scale(1.02) translateY(-10px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(42,201,250,0.2);
+    }
+
+    .service-icon {
+      background: rgba(42,201,250,0.08);
+      width: 84px;
+      height: 84px;
+      line-height: 84px;
+      border-radius: 24px;
+      margin: 0 auto 28px;
+      color: var(--deep-blue);
+      font-size: 2.4rem;
+      transition: 0.2s;
+    }
+    .service-card:hover .service-icon {
+      background: var(--aqua-bright);
+      color: white;
+    }
+
+    .service-card h3 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #0a2e3f;
+    }
+    .service-card p {
+      color: #3d5f6b;
+      font-size: 1rem;
+    }
+
+    /* ---------- WHY US / FEATURES ---------- */
+    .why-us {
+      background: var(--warm-gray);
+      padding: 100px 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .feature {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      background: white;
+      padding: 30px 22px;
+      border-radius: 24px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+      transition: 0.2s;
+    }
+    .feature:hover {
+      background: white;
+      box-shadow: 0 25px 40px -16px rgba(11,59,92,0.1);
+    }
+    .feature i {
+      font-size: 2rem;
+      color: var(--aqua-bright);
+      background: rgba(42,201,250,0.1);
+      padding: 14px;
+      border-radius: 18px;
+    }
+    .feature h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--deep-blue);
+    }
+    .feature p {
+      color: #3a5a68;
+    }
+
+    /* ---------- TESTIMONIALS ---------- */
+    .testimonials {
+      padding: 100px 0;
+      background: white;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    .testimonial-card {
+      background: var(--soft-white);
+      padding: 36px 30px;
+      border-radius: 28px;
+      border: 1px solid rgba(42,201,250,0.1);
+      transition: 0.25s;
+    }
+    .testimonial-card:hover {
+      background: white;
+      box-shadow: 0 20px 35px -8px rgba(11,59,92,0.06);
+      border-color: rgba(42,201,250,0.3);
+    }
+    .stars {
+      color: #ffb83b;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+    .testimonial-card p {
+      font-size: 1.08rem;
+      font-style: italic;
+      color: #1e3a47;
+      margin-bottom: 28px;
+    }
+    .customer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .customer i {
+      font-size: 2.4rem;
+      color: var(--deep-blue);
+    }
+    .customer h5 {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .customer span {
+      color: #5b7987;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- CALL TO ACTION (BOOKING) ---------- */
+    .cta {
+      background: var(--deep-blue);
+      padding: 90px 0;
+      color: white;
+      border-radius: 60px 60px 0 0;
+      margin-top: 20px;
+    }
+
+    .cta-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cta h2 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .cta p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+    }
+    .cta .btn {
+      background: white;
+      color: var(--deep-blue);
+      font-size: 1.2rem;
+      padding: 18px 48px;
+    }
+    .cta .btn:hover {
+      background: var(--aqua-bright);
+      color: #0a2a3b;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: #0a1c26;
+      color: #d1e2ed;
+      padding: 60px 0 30px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-logo i {
+      font-size: 2rem;
+      background: #1f4a5c;
+      padding: 10px;
+      border-radius: 16px;
+      color: var(--aqua-bright);
+      margin-right: 12px;
+    }
+    .footer-logo span {
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: white;
+    }
+    .footer-col p {
+      margin-top: 20px;
+      color: #adc9d6;
+    }
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 28px;
+      font-size: 1.3rem;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col li {
+      margin-bottom: 14px;
+    }
+    .footer-col a {
+      color: #bed9e3;
+      transition: 0.2s;
+    }
+    .footer-col a:hover {
+      color: var(--aqua-bright);
+    }
+    .social-icons {
+      display: flex;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    .social-icons i {
+      font-size: 1.6rem;
+      color: #c2dde6;
+      transition: 0.2s;
+    }
+    .social-icons i:hover {
+      color: var(--aqua-bright);
+      transform: translateY(-5px);
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 40px;
+      border-top: 1px solid #1e4453;
+      color: #99b7c2;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 1024px) {
+      .hero h1 { font-size: 2.9rem; }
+      .features-grid { grid-template-columns: repeat(2,1fr); }
+      .testimonial-grid { grid-template-columns: repeat(2,1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { flex-direction: column; gap: 20px; }
+      .nav-links { gap: 28px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero p { max-width: 100%; }
+      .section-title { font-size: 2rem; }
+      .features-grid, .testimonial-grid { grid-template-columns: 1fr; }
+      .cta-flex { flex-direction: column; text-align: center; gap: 32px; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 20px; }
+    }
+
+    /* ---------- EMERGENCY BANNER (JS will update) ---------- */
+    .emergency-banner {
+      background: #ffedd5;
+      color: #7b4a1e;
+      padding: 14px 32px;
+      text-align: center;
+      font-weight: 600;
+      border-bottom: 2px solid #fcd34d;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .emergency-banner i {
+      color: #dc2626;
+    }
+    #emergencyStatus {
+      background: #0b3b5c;
+      color: white;
+      padding: 4px 14px;
+      border-radius: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- EMERGENCY BANNER – real-time status via JS -->
+  <div class="emergency-banner" id="emergencyBanner">
+    <span><i class="fas fa-phone-alt"></i> 24/7 EMERGENCY: <strong>(800) 555-1234</strong></span>
+    <span id="emergencyStatus">⏳ Loading status...</span>
+  </div>
+
+  <!-- HEADER / NAVIGATION -->
+  <header>
+    <nav>
+      <div class="logo">
+        <i class="fas fa-wrench"></i>
+        <span>FlowFix</span>
+      </div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="btn btn-accent" style="padding: 12px 28px;"><i class="fas fa-calendar-check"></i>Book now</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="hero-badge"><i class="fas fa-bolt"></i>  Same‑day service • 5‑star rated</span>
+          <h1>
+            <span class="hero-highlight">Leak?</span> Clog? <br>No call too small.
+          </h1>
+          <p>Trusted by 6,000+ homeowners. Upfront pricing, 24/7 emergency, and a 100% satisfaction guarantee — we’ll fix it right the first time.</p>
+          <a href="#contact" class="btn"><i class="fas fa-tools"></i> Schedule a plumber</a>
+          
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>15 min</h3>
+              <p>Avg. response</p>
+            </div>
+            <div class="stat-item">
+              <h3>4.98 ★</h3>
+              <p>2,300+ reviews</p>
+            </div>
+            <div class="stat-item">
+              <h3>25 yrs</h3>
+              <p>local pros</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image"></div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="services">
+      <div class="container">
+        <h2 class="section-title">Professional plumbing services</h2>
+        <p class="section-subhead">From emergency repairs to full installations — we handle everything with precision.</p>
+        
+        <div class="service-grid">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-water"></i></div>
+            <h3>Leak repair</h3>
+            <p>Accurate detection & durable fixes for pipes, faucets, toilets. No drywall damage.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-toilet"></i></div>
+            <h3>Drain cleaning</h3>
+            <p>Hydro-jetting and snaking to clear tough clogs fast. Prevent backups.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-shower"></i></div>
+            <h3>Fixtures</h3>
+            <p>Install or upgrade sinks, faucets, showers, disposals. Modern designs.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-temperature-high"></i></div>
+            <h3>Water heaters</h3>
+            <p>Tankless & traditional repair/installation. Endless hot water solutions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY US / FEATURES -->
+    <section id="why-us" class="why-us">
+      <div class="container">
+        <h2 class="section-title">Why FlowFix? ⚡</h2>
+        <p class="section-subhead">We don’t just fix pipes — we build trust. Here’s what sets us apart.</p>
+        <div class="features-grid">
+          <div class="feature">
+            <i class="fas fa-clock"></i>
+            <div>
+              <h4>On‑time guarantee</h4>
+              <p>We arrive within your window or the diagnostic is free.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <i class="fas fa-shield-alt"></i>
+            <div>
+              <h4>Licensed & insured</h4>
+              <p>Fully bonded, background-checked pros you can trust at home.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <i class="fas fa-hand-holding-usd"></i>
+            <div>
+              <h4>Flat‑rate pricing</h4>
+              <p>Know the cost before we start. No hidden fees.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <i class="fas fa-leaf"></i>
+            <div>
+              <h4>Eco‑friendly</h4>
+              <p>Water‑saving fixtures and green practices.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+        <h2 class="section-title">Real reviews from neighbors</h2>
+        <p class="section-subhead">4.98 ★★★★★ – we’re proud of our word‑of‑mouth reputation.</p>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>“Our basement pipe burst at 11pm. FlowFix was here within 30 mins and fixed it fast. Fair price, super professional.”</p>
+            <div class="customer">
+              <i class="fas fa-user-circle"></i>
+              <div>
+                <h5>Linda M.</h5>
+                <span>Dunwoody, GA</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>“Replaced our old water heater with a tankless. They explained every step and left the space spotless. Highly recommend.”</p>
+            <div class="customer">
+              <i class="fas fa-user-circle"></i>
+              <div>
+                <h5>Carlos R.</h5>
+                <span>Austin, TX</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>“I’ve used them for years – always courteous, on time and the quality is top notch. My go-to plumber.”</p>
+            <div class="customer">
+              <i class="fas fa-user-circle"></i>
+              <div>
+                <h5>Priya K.</h5>
+                <span>Portland, OR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION / CONTACT & BOOKING -->
+    <section id="contact" class="cta">
+      <div class="container cta-flex">
+        <div>
+          <h2>Need a plumber now?</h2>
+          <p><i class="fas fa-check-circle"></i> Same‑day availability • Free estimate • 24/7 support</p>
+        </div>
+        <a href="#" class="btn" id="bookCallBtn"><i class="fas fa-calendar-alt"></i> Book online</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-logo">
+        <i class="fas fa-wrench"></i><span>FlowFix</span>
+        <p>Neighborhood plumbers you can rely on. Quality repairs, fair prices, and a 100% satisfaction guarantee.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#why-us">Why us</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Leak repair</a></li>
+          <li><a href="#">Drain cleaning</a></li>
+          <li><a href="#">Water heaters</a></li>
+          <li><a href="#">Sewer line</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><i class="fas fa-phone"></i> (800) 555-1234</li>
+          <li><i class="fas fa-envelope"></i> help@flowfix.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> 123 Pipe St, Suite 100</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container copyright">
+      <p>© 2025 FlowFix Plumbing. All rights reserved. Licensed & insured.</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT (INTERACTIVE & REALISTIC) -->
+  <script>
+    (function() {
+      "use strict";
+
+      // 1) DYNAMIC EMERGENCY STATUS BASED ON CURRENT HOUR
+      function updateEmergencyStatus() {
+        const statusEl = document.getElementById('emergencyStatus');
+        if (!statusEl) return;
+
+        const now = new Date();
+        const hour = now.getHours(); // 0-23
+
+        // Simulate real "emergency response" status
+        if (hour >= 8 && hour < 22) {
+          // Daytime – instant dispatch
+          statusEl.innerHTML = '<i class="fas fa-clock"></i> 🟢 Immediate dispatch • 4 techs available';
+          statusEl.style.background = '#0b6e4f';
+        } else if (hour >= 22 || hour < 2) {
+          // Late night – limited but on call
+          statusEl.innerHTML = '<i class="fas fa-moon"></i> 🌙 Night crew • 15 min response';
+          statusEl.style.background = '#374151';
+        } else {
+          // Early morning
+          statusEl.innerHTML = '<i class="fas fa-clock"></i> ⚡ 24/7 standby • Call now';
+          statusEl.style.background = '#0b3b5c';
+        }
+      }
+
+      // 2) SMOOTH SCROLL FOR NAVIGATION (simple)
+      function initSmoothScroll() {
+        const links = document.querySelectorAll('a[href^="#"]');
+        links.forEach(link => {
+          link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        });
+      }
+
+      // 3) "BOOK ONLINE" ALERT – shows demo confirmation
+      function initBookingButtons() {
+        const bookBtn = document.getElementById('bookCallBtn');
+        const navBookBtn = document.querySelector('.btn.btn-accent');
+        
+        function bookingHandler(e) {
+          e.preventDefault();
+          alert('✅ Thank you! A FlowFix dispatcher will confirm your appointment via text within 2 minutes.');
+        }
+        
+        if (bookBtn) bookBtn.addEventListener('click', bookingHandler);
+        if (navBookBtn) navBookBtn.addEventListener('click', bookingHandler);
+      }
+
+      // 4) SMALL COUNTER ANIMATION (simple – just to show interactive flavor)
+      function animateStats() {
+        const statNumbers = document.querySelectorAll('.stat-item h3');
+        if (!statNumbers.length) return;
+        
+        // For demo, just set with a small fade effect (already hardcoded, but we add a class)
+        statNumbers.forEach(el => {
+          el.style.transition = '0.4s';
+          el.style.opacity = '1';
+        });
+      }
+
+      // 5) LIVE TIME FOR EMERGENCY BANNER: update every minute
+      function startLiveClock() {
+        updateEmergencyStatus();
+        setInterval(updateEmergencyStatus, 60000); // every minute – keeps feeling alive
+      }
+
+      // 6) WELCOME CONSOLE (professional touch)
+      function proWelcome() {
+        console.log('🔧 FlowFix – professional plumbing website. Emergency status active.');
+      }
+
+      // INIT ALL
+      window.addEventListener('DOMContentLoaded', function() {
+        updateEmergencyStatus();
+        initSmoothScroll();
+        initBookingButtons();
+        animateStats();
+        startLiveClock();
+        proWelcome();
+      });
+
+    })();
+  </script>
+
+  <!-- subtle micro-interactions: hover and modern feel -->
+  <!-- no extra inline CSS needed — all set -->
+</body>
+</html>

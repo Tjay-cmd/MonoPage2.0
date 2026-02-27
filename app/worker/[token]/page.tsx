@@ -1,7 +1,6 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { notFound } from "next/navigation";
 import { WorkerBoard } from "./WorkerBoard";
-import { WorkerManifest } from "./WorkerManifest";
 
 export type WorkerJob = {
   id: string;
@@ -39,7 +38,6 @@ export default async function WorkerBoardPage({
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <WorkerManifest token={token} />
       <WorkerBoard
         technicianName={tech.name}
         technicianId={tech.id}

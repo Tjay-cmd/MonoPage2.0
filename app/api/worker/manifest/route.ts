@@ -13,7 +13,10 @@ export async function GET(req: NextRequest) {
     display: "standalone",
     background_color: "#f8fafc",
     theme_color: "#4f46e5",
-    icons: [],
+    icons: [
+      { src: `${origin}/icon-192.png`, sizes: "192x192", type: "image/png" },
+      { src: `${origin}/icon-512.png`, sizes: "512x512", type: "image/png" },
+    ],
   };
 
   return NextResponse.json(manifest, {

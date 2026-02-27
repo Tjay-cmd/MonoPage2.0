@@ -40,6 +40,7 @@ export function WorkerBoard({
 }) {
   const [jobs, setJobs] = useState(initialJobs);
   const [showPwaPrompt, setShowPwaPrompt] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<{ prompt: () => Promise<{ outcome: string }> } | null>(null);
   const [showPushPrompt, setShowPushPrompt] = useState(false);
   const [pushEnabled, setPushEnabled] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
@@ -53,6 +54,15 @@ export function WorkerBoard({
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js").catch(() => {});
     }
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e as unknown as { prompt: () => Promise<{ outcome: string }> });
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
   useEffect(() => {
@@ -77,15 +87,35 @@ export function WorkerBoard({
         {showPwaPrompt && !isStandalone && (
           <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4 text-sm">
             <p className="font-medium text-indigo-900">Add to Home Screen</p>
-            <p className="text-indigo-700 mt-1">
-              Tap Share → Add to Home Screen for quick access.
-            </p>
-            <button
-              onClick={() => setShowPwaPrompt(false)}
-              className="mt-2 text-indigo-600 font-medium"
-            >
-              Dismiss
-            </button>
+            {deferredPrompt ? (
+              <p className="text-indigo-700 mt-1">
+                Install the app for quick access to your jobs.
+              </p>
+            ) : (
+              <p className="text-indigo-700 mt-1">
+                Tap the menu (⋮) → &quot;Add to Home screen&quot; or &quot;Install app&quot; for quick access.
+              </p>
+            )}
+            <div className="mt-3 flex flex-wrap gap-2">
+              {deferredPrompt && (
+                <button
+                  onClick={async () => {
+                    await deferredPrompt.prompt();
+                    setDeferredPrompt(null);
+                    setShowPwaPrompt(false);
+                  }}
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium"
+                >
+                  Add to Home Screen
+                </button>
+              )}
+              <button
+                onClick={() => setShowPwaPrompt(false)}
+                className="text-indigo-600 font-medium"
+              >
+                Dismiss
+              </button>
+            </div>
           </div>
         )}
 

@@ -24,11 +24,11 @@ export default async function JobsPage({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("plan")
+    .select("plan, is_admin")
     .eq("id", user.id)
     .single();
 
-  if (profile?.plan !== "pro") {
+  if (profile?.plan !== "pro" && !profile?.is_admin) {
     return (
       <div className="p-8 max-w-2xl">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Jobs</h1>

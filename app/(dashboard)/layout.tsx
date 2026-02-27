@@ -29,7 +29,7 @@ export default async function DashboardLayout({
   const plan = profile?.plan ?? null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       <DashboardSideNav
         userEmail={user.email ?? ""}
         niche={niche}
@@ -37,7 +37,8 @@ export default async function DashboardLayout({
         isAdmin={profile?.is_admin ?? false}
         plan={plan}
       />
-      <main className="pl-64 min-h-screen">
+      {/* pt-11 for mobile top bar; px-4 + safe-area on mobile so content never touches edges; lg:pt-0 + lg:pl-64 for desktop */}
+      <main className="pt-11 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] lg:pt-0 lg:pl-64 lg:pr-0 min-h-screen max-w-full overflow-x-hidden">
         {children}
       </main>
     </div>

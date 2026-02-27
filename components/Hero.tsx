@@ -1,11 +1,9 @@
 import Link from "next/link";
-import FloatingPaths from "./FloatingPaths";
 
 export default function Hero() {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-indigo-50 to-white py-20 px-4 sm:px-6 lg:px-8">
-      <FloatingPaths />
-      <div className="relative z-10 mx-auto max-w-7xl text-center">
+        <div className="relative z-20 mx-auto max-w-7xl text-center">
         <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
           Your service business,
           <span className="block text-indigo-600">online in minutes</span>

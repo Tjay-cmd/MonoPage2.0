@@ -19,11 +19,11 @@ export default async function PaymentsSettingsPage({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("plan, payfast_merchant_id, payfast_merchant_key, payfast_passphrase, payfast_sandbox")
+    .select("plan, is_admin, payfast_merchant_id, payfast_merchant_key, payfast_passphrase, payfast_sandbox")
     .eq("id", user.id)
     .single();
 
-  if (profile?.plan !== "pro") {
+  if (profile?.plan !== "pro" && !profile?.is_admin) {
     return (
       <div className="p-8 max-w-2xl">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Payments</h1>

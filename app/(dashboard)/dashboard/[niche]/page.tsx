@@ -29,6 +29,11 @@ export default async function NicheDashboardPage({
 
   let jobsThisWeek = 0;
   let jobsToday = 0;
+  let pendingQuotes = 0;
+  let techniciansCount = 0;
+  let paidThisMonth = 0;
+  let outstanding = 0;
+  let unpaidInvoicesCount = 0;
   if (nicheLower === "plumber" && user?.id) {
     const { data: sites } = await supabase
       .from("user_sites")
@@ -61,7 +66,42 @@ export default async function NicheDashboardPage({
         .lt("scheduled_at", endOfToday.toISOString());
       jobsThisWeek = weekCount ?? 0;
       jobsToday = todayCount ?? 0;
+
+      const { count: pendingCount } = await supabase
+        .from("quote_requests")
+        .select("id", { count: "exact", head: true })
+        .in("user_site_id", siteIds)
+        .eq("status", "new");
+      pendingQuotes = pendingCount ?? 0;
+
+      const { data: invoices } = await supabase
+        .from("invoices")
+        .select("total, status, paid_at")
+        .in("user_site_id", siteIds);
+
+      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+
+      for (const inv of invoices ?? []) {
+        const total = Number(inv.total) || 0;
+        if (inv.status === "paid" && inv.paid_at) {
+          const paidAt = new Date(inv.paid_at);
+          if (paidAt >= startOfMonth && paidAt <= endOfMonth) {
+            paidThisMonth += total;
+          }
+        }
+        if (inv.status === "sent") {
+          outstanding += total;
+          unpaidInvoicesCount += 1;
+        }
+      }
     }
+
+    const { count: techCount } = await supabase
+      .from("technicians")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", user.id);
+    techniciansCount = techCount ?? 0;
   }
 
   switch (nicheLower) {
@@ -72,6 +112,11 @@ export default async function NicheDashboardPage({
             displayName={displayName}
             jobsThisWeek={jobsThisWeek}
             jobsToday={jobsToday}
+            pendingQuotes={pendingQuotes}
+            techniciansCount={techniciansCount}
+            paidThisMonth={paidThisMonth}
+            outstanding={outstanding}
+            unpaidInvoicesCount={unpaidInvoicesCount}
             niche={niche}
           />
         </div>

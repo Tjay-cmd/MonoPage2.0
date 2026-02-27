@@ -19,10 +19,10 @@ export default async function EditJobPage({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("plan")
+    .select("plan, is_admin")
     .eq("id", user.id)
     .single();
-  if (profile?.plan !== "pro")
+  if (profile?.plan !== "pro" && !profile?.is_admin)
     redirect(`/dashboard/${niche}/subscription`);
 
   const { data: sites } = await supabase

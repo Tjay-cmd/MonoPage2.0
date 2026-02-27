@@ -33,38 +33,37 @@ export function LeadsFilters({ niche }: { niche: string }) {
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-4 mb-6">
-      <select
-        value={status}
-        onChange={(e) => updateParams({ status: e.target.value })}
-        className="text-base border border-gray-300 rounded-lg px-4 py-2.5 min-w-[160px]"
-      >
+    <div className="space-y-3 mb-5">
+      {/* Search */}
+      <div className="relative">
+        <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+        </svg>
+        <input
+          type="search"
+          placeholder="Search leads..."
+          value={q}
+          onChange={(e) => updateParams({ q: e.target.value })}
+          className="w-full sm:w-72 pl-10 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50"
+        />
+      </div>
+
+      {/* Status pills — scrollable on mobile */}
+      <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none -mx-1 px-1">
         {STATUS_OPTIONS.map((opt) => (
-          <option key={opt.value || "all"} value={opt.value}>
+          <button
+            key={opt.value || "all"}
+            onClick={() => updateParams({ status: opt.value })}
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-xl whitespace-nowrap shrink-0 transition-colors ${
+              status === opt.value
+                ? "bg-indigo-600 text-white shadow-sm"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          >
             {opt.label}
-          </option>
+          </button>
         ))}
-      </select>
-      <input
-        type="search"
-        placeholder="Search name, email, message..."
-        value={q}
-        onChange={(e) => updateParams({ q: e.target.value })}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            updateParams({ q: (e.target as HTMLInputElement).value });
-          }
-        }}
-        className="text-base border border-gray-300 rounded-lg px-4 py-2.5 w-72"
-      />
-      {q && (
-        <button
-          onClick={() => updateParams({ q: "" })}
-          className="text-base text-gray-500 hover:text-gray-700 font-medium"
-        >
-          Clear search
-        </button>
-      )}
+      </div>
     </div>
   );
 }

@@ -7,9 +7,13 @@ type Tab = "leads" | "quotes" | "invoices";
 export function QuotesPageTabs({
   niche,
   newLeadsCount,
+  quotesCount,
+  invoicesCount,
 }: {
   niche: string;
   newLeadsCount: number;
+  quotesCount?: number;
+  invoicesCount?: number;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -22,43 +26,38 @@ export function QuotesPageTabs({
     router.push(`/dashboard/${niche}/quotes?${params.toString()}`);
   }
 
+  const tabs: { key: Tab; label: string; count?: number; redBadge?: boolean }[] = [
+    { key: "leads",    label: "Leads",    count: newLeadsCount > 0 ? newLeadsCount : undefined, redBadge: true },
+    { key: "quotes",   label: "Quotes",   count: quotesCount },
+    { key: "invoices", label: "Invoices", count: invoicesCount },
+  ];
+
   return (
-    <div className="flex gap-1 border-b border-gray-200 mb-6">
-      <button
-        onClick={() => setTab("leads")}
-        className={`px-5 py-3 text-base font-medium rounded-t-lg -mb-px ${
-          tab === "leads"
-            ? "bg-white border border-gray-200 border-b-white text-indigo-700"
-            : "text-gray-600 hover:text-gray-900"
-        }`}
-      >
-        Leads
-        {newLeadsCount > 0 && (
-          <span className="ml-2 px-2 py-0.5 text-sm bg-indigo-100 text-indigo-700 rounded">
-            {newLeadsCount}
-          </span>
-        )}
-      </button>
-      <button
-        onClick={() => setTab("quotes")}
-        className={`px-5 py-3 text-base font-medium rounded-t-lg -mb-px ${
-          tab === "quotes"
-            ? "bg-white border border-gray-200 border-b-white text-indigo-700"
-            : "text-gray-600 hover:text-gray-900"
-        }`}
-      >
-        Quotes
-      </button>
-      <button
-        onClick={() => setTab("invoices")}
-        className={`px-5 py-3 text-base font-medium rounded-t-lg -mb-px ${
-          tab === "invoices"
-            ? "bg-white border border-gray-200 border-b-white text-indigo-700"
-            : "text-gray-600 hover:text-gray-900"
-        }`}
-      >
-        Invoices
-      </button>
+    <div className="flex gap-0 overflow-x-auto pb-0 scrollbar-none -mx-1 px-1">
+      {tabs.map(({ key, label, count, redBadge }) => (
+        <button
+          key={key}
+          onClick={() => setTab(key)}
+          className={`flex items-center gap-2 whitespace-nowrap px-4 sm:px-6 py-3 sm:py-3.5 text-sm font-semibold border-b-2 transition-all shrink-0 ${
+            tab === key
+              ? "border-indigo-600 text-indigo-700"
+              : "border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-200"
+          }`}
+        >
+          {label}
+          {count !== undefined && count > 0 && (
+            <span className={`px-1.5 sm:px-2 py-0.5 text-xs rounded-full font-bold ${
+              redBadge && tab !== key
+                ? "bg-red-500 text-white"
+                : tab === key
+                ? "bg-indigo-100 text-indigo-700"
+                : "bg-gray-200 text-gray-600"
+            }`}>
+              {count}
+            </span>
+          )}
+        </button>
+      ))}
     </div>
   );
 }

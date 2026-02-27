@@ -2,22 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
-// Derive niche from URL as fallback (e.g. /dashboard/plumber)
 function getNicheFromPathname(pathname: string): string | null {
   const match = pathname.match(/^\/dashboard\/(plumber|photographer|barber)/);
   return match ? match[1] : null;
 }
 
 const PLUMBER_NAV_ITEMS = [
-  { href: "jobs", label: "Jobs", comingSoon: false, proOnly: true },
-  { href: "quotes", label: "Quotes & Invoices", comingSoon: false, proOnly: true },
-  { href: "inventory", label: "Inventory", comingSoon: true },
-  { href: "website", label: "Your Website", comingSoon: false },
-  { href: "images", label: "My Images", comingSoon: false },
-  { href: "settings/email", label: "Email Design", comingSoon: false, proOnly: true },
-  { href: "settings/payments", label: "Payments", comingSoon: false, proOnly: true },
-  { href: "subscription", label: "Subscription", comingSoon: false },
+  { href: "jobs",              label: "Jobs",             comingSoon: false, proOnly: true  },
+  { href: "quotes",            label: "Quotes & Invoices",comingSoon: false, proOnly: true  },
+  { href: "website",           label: "Your Website",     comingSoon: false                 },
+  { href: "images",            label: "My Images",        comingSoon: false                 },
+  { href: "settings/contact",  label: "Site Contact",     comingSoon: false                 },
+  { href: "settings/email",    label: "Email Design",     comingSoon: false, proOnly: true  },
+  { href: "settings/payments", label: "Payments",         comingSoon: false, proOnly: true  },
+  { href: "subscription",      label: "Subscription",     comingSoon: false                 },
 ];
 
 export default function DashboardSideNav({
@@ -38,54 +38,65 @@ export default function DashboardSideNav({
   const activeNiche = niche ?? nicheFromUrl;
   const basePath = activeNiche ? `/dashboard/${activeNiche}` : "/dashboard";
 
-  return (
-    <aside className="fixed left-0 top-0 z-40 h-screen w-64 bg-white border-r border-gray-200 flex flex-col">
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Close sidebar on route change
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
+
+  // Prevent body scroll when mobile menu open
+  useEffect(() => {
+    if (mobileOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  const navContent = (
+    <>
       {/* Logo */}
-      <div className="p-6 border-b border-gray-200">
-        <Link href="/" className="text-xl font-bold text-indigo-600">
-          MonoPage
-        </Link>
+      <div className="px-5 py-5 border-b border-gray-100 flex items-center justify-between">
+        <Link href="/" className="text-lg font-bold text-indigo-600">MonoPage</Link>
+        {/* Close button – mobile only */}
+        <button
+          onClick={() => setMobileOpen(false)}
+          className="lg:hidden p-1.5 rounded-lg text-gray-400 hover:bg-gray-100"
+          aria-label="Close menu"
+        >
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
 
-      {/* Nav items */}
-      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-        <div className="mb-4">
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-            {nicheLabel}
-          </p>
-        </div>
+      {/* Nav */}
+      <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-0.5">
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-3">
+          {nicheLabel}
+        </p>
 
         {activeNiche === "plumber" &&
           PLUMBER_NAV_ITEMS.map((item) => {
             const isProOnly = "proOnly" in item && item.proOnly;
-            const needsPro = isProOnly && plan !== "pro";
+            const needsPro = isProOnly && plan !== "pro" && !isAdmin;
+            const isActive = pathname.startsWith(`${basePath}/${item.href}`);
             return (
-              <div key={item.href} className="relative">
+              <div key={item.href}>
                 {item.comingSoon ? (
-                  <span
-                    className={`block px-3 py-2 rounded-md text-sm ${
-                      pathname === `${basePath}/${item.href}`
-                        ? "bg-indigo-50 text-indigo-700 font-medium"
-                        : "text-gray-700 hover:bg-gray-50"
-                    }`}
-                  >
+                  <span className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-gray-400 cursor-default">
                     {item.label}
-                    <span className="ml-2 text-xs text-gray-400">
-                      Coming soon
-                    </span>
+                    <span className="text-xs text-gray-300">Soon</span>
                   </span>
                 ) : (
                   <Link
                     href={`${basePath}/${item.href}`}
-                    className={`block px-3 py-2 rounded-md text-sm ${
-                      pathname.startsWith(`${basePath}/${item.href}`)
-                        ? "bg-indigo-50 text-indigo-700 font-medium"
-                        : "text-gray-700 hover:bg-gray-50"
+                    className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm transition-colors ${
+                      isActive
+                        ? "bg-indigo-50 text-indigo-700 font-semibold"
+                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                     }`}
                   >
                     {item.label}
                     {needsPro && (
-                      <span className="ml-2 text-xs text-amber-600">(Pro)</span>
+                      <span className="text-xs px-1.5 py-0.5 bg-amber-100 text-amber-600 rounded font-medium">Pro</span>
                     )}
                   </Link>
                 )}
@@ -94,16 +105,14 @@ export default function DashboardSideNav({
           })}
 
         {activeNiche === "plumber" && isAdmin && (
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-2 mb-2">
-              Admin
-            </p>
+          <div className="mt-4 pt-4 border-t border-gray-100">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-2">Admin</p>
             <Link
               href={`${basePath}/templates`}
-              className={`block px-3 py-2 rounded-md text-sm ${
+              className={`flex items-center px-3 py-2.5 rounded-xl text-sm transition-colors ${
                 pathname === `${basePath}/templates`
-                  ? "bg-indigo-50 text-indigo-700 font-medium"
-                  : "text-gray-700 hover:bg-gray-50"
+                  ? "bg-indigo-50 text-indigo-700 font-semibold"
+                  : "text-gray-600 hover:bg-gray-100"
               }`}
             >
               Upload Templates
@@ -112,32 +121,70 @@ export default function DashboardSideNav({
         )}
 
         {activeNiche !== "plumber" && (
-          <p className="px-3 py-2 text-sm text-gray-500">
-            Dashboard tools coming soon
-          </p>
+          <p className="px-3 py-2 text-sm text-gray-400">Dashboard tools coming soon</p>
         )}
       </nav>
 
-      {/* User section */}
-      <div className="p-4 border-t border-gray-200 space-y-2">
-        <p className="text-xs text-gray-500 truncate px-2" title={userEmail}>
-          {userEmail}
-        </p>
+      {/* User footer */}
+      <div className="px-3 pb-4 pt-3 border-t border-gray-100 space-y-1">
+        <p className="text-xs text-gray-400 truncate px-3 mb-2" title={userEmail}>{userEmail}</p>
         <form action="/auth/signout" method="post">
           <button
             type="submit"
-            className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md hover:text-red-600 transition-colors"
+            className="w-full text-left px-3 py-2.5 text-sm text-gray-600 hover:bg-red-50 hover:text-red-600 rounded-xl transition-colors"
           >
             Sign out
           </button>
         </form>
         <Link
           href="/"
-          className="block px-3 py-2 text-sm text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-md"
+          className="block px-3 py-2.5 text-sm text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-colors"
         >
           ← Back to home
         </Link>
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {/* ── Mobile top bar ─────────────────────────────── */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 h-11 bg-white border-b border-gray-200 flex items-center justify-between px-4">
+        <button
+          onClick={() => setMobileOpen(true)}
+          className="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors"
+          aria-label="Open menu"
+        >
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <Link href="/" className="text-sm font-bold text-indigo-600">MonoPage</Link>
+        <div className="w-9" /> {/* spacer to centre logo */}
+      </header>
+
+      {/* ── Mobile overlay backdrop ─────────────────────── */}
+      {mobileOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+          onClick={() => setMobileOpen(false)}
+          aria-hidden
+        />
+      )}
+
+      {/* ── Sidebar panel ──────────────────────────────── */}
+      {/* Desktop: always visible fixed sidebar */}
+      {/* Mobile: slide-in drawer */}
+      <aside
+        className={`
+          fixed top-0 left-0 z-50 h-screen w-64 bg-white border-r border-gray-100 flex flex-col
+          transition-transform duration-300 ease-in-out
+          lg:translate-x-0
+          ${mobileOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full lg:translate-x-0"}
+        `}
+      >
+        {navContent}
+      </aside>
+    </>
   );
 }

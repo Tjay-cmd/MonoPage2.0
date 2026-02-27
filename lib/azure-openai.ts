@@ -16,6 +16,7 @@ export function getAIClient(): { client: AIClient; model: string } {
       client: new OpenAI({
         apiKey: deepseekApiKey,
         baseURL: "https://api.deepseek.com",
+        timeout: 120000,
       }),
       model: process.env.DEEPSEEK_MODEL || "deepseek-chat",
     };
@@ -28,6 +29,7 @@ export function getAIClient(): { client: AIClient; model: string } {
         apiKey: azureApiKey,
         deployment: azureDeployment,
         apiVersion: "2024-08-01-preview",
+        timeout: 120000,
       }),
       model: azureDeployment,
     };
@@ -35,7 +37,7 @@ export function getAIClient(): { client: AIClient; model: string } {
 
   if (openaiApiKey) {
     return {
-      client: new OpenAI({ apiKey: openaiApiKey }),
+      client: new OpenAI({ apiKey: openaiApiKey, timeout: 120000 }),
       model: openaiModel,
     };
   }

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="__BUSINESS_NAME__ - Professional plumbing services in South Africa. Leak repair, drain cleaning, water heaters, emergency 24/7. Licensed, insured, satisfaction guaranteed.">
+    <meta property="og:title" content="__BUSINESS_NAME__ - Professional & Reliable">
+    <meta property="og:description" content="Expert plumbing services in South Africa. 24/7 emergency, leak repair, drain cleaning, water heaters. Licensed & insured.">
+    <meta property="og:type" content="website">
+    <title>__BUSINESS_NAME__ - Professional & Reliable</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-accent: #FF4500; /* OrangeRed */
+            --secondary-accent: #FF6347; /* Tomato */
+            --text-dark: #2C3E50; /* Dark Slate Gray */
+            --text-light: #7F8C8D; /* Asbestos */
+            --bg-light: #F5F8FA; /* Light Grayish Blue */
+            --bg-subtle: #EBF2F7; /* Light Steel Blue */
+            --white: #FFFFFF;
+            --clouds: #ECF0F1; /* Clouds */
+            --border-radius: 10px;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease-in-out;
+            --scroll-progress-bg: var(--primary-accent);
+            --scroll-progress-fg: var(--text-dark);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+        }
+
+        h1 { font-weight: 700; }
+        h2 { font-weight: 700; }
+        h3 { font-weight: 600; }
+        p { font-weight: 400; }
+
+        .btn-primary {
+            background-color: var(--primary-accent);
+            color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 0.8rem 1.8rem;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .btn-primary:hover {
+            background-color: var(--secondary-accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-accent);
+            border: 2px solid var(--primary-accent);
+            border-radius: var(--border-radius);
+            padding: 0.8rem 1.8rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary-accent);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .input-field {
+            background-color: var(--clouds);
+            color: var(--text-dark);
+            border: 1px solid var(--bg-subtle);
+            border-radius: var(--border-radius);
+            padding: 0.8rem 1rem;
+            transition: var(--transition);
+            width: 100%;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.2);
+        }
+
+        /* Sticky Header */
+        #navbar {
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+        #navbar.scrolled {
+            background-color: rgba(245, 248, 250, 0.85); /* Slightly transparent bg-light */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Service Card Icon */
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--bg-subtle);
+            color: var(--primary-accent);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+        .card:hover .service-icon {
+            background-color: var(--primary-accent);
+            color: var(--white);
+        }
+
+        /* Testimonial Star Rating */
+        .star {
+            color: var(--primary-accent);
+            font-size: 1.2rem;
+        }
+
+        /* Smooth Scroll Anchor Styles */
+        a[href^="#"]:not(.no-scroll-style) {
+            scroll-margin-top: 80px;
+        }
+
+        /* Custom color utilities (Tailwind doesn't know these) */
+        .text-text-dark { color: var(--text-dark); }
+        .text-text-light { color: var(--text-light); }
+        .text-primary-accent { color: var(--primary-accent); }
+        .text-clouds { color: var(--clouds); }
+        .bg-bg-light { background-color: var(--bg-light); }
+        .bg-bg-subtle { background-color: var(--bg-subtle); }
+        .bg-text-dark { background-color: var(--text-dark); }
+        .hover\:text-primary-accent:hover { color: var(--primary-accent); }
+        .hover\:text-white:hover { color: var(--white); }
+        .bg-primary-accent { background-color: var(--primary-accent); }
+
+        /* Mobile menu backdrop */
+        .mobile-menu-backdrop {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-menu-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--primary-accent);
+            outline-offset: 2px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 1rem;
+            z-index: 9999;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-accent);
+            color: white;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus {
+            top: 1rem;
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scroll-animate-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate-left.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .scroll-animate-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animate-right.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        /* Stagger delays for grid items */
+        .scroll-animate-delay-1 { transition-delay: 0.1s; }
+        .scroll-animate-delay-2 { transition-delay: 0.2s; }
+        .scroll-animate-delay-3 { transition-delay: 0.3s; }
+        .scroll-animate-delay-4 { transition-delay: 0.4s; }
+        .scroll-animate-delay-5 { transition-delay: 0.5s; }
+        .scroll-animate-delay-6 { transition-delay: 0.6s; }
+        .scroll-animate-delay-7 { transition-delay: 0.7s; }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1.5 w-0 bg-primary-accent z-50" style="background: var(--scroll-progress-bg);"></div>
+
+    <!-- Header/Navigation -->
+    <header id="navbar" class="sticky top-0 w-full py-4 px-4 sm:px-6 lg:px-8 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="text-2xl font-bold text-text-dark">__BUSINESS_NAME__</div>
+            </div>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="#hero" class="text-text-light hover:text-primary-accent transition-colors duration-300">Home</a>
+                <a href="#services" class="text-text-light hover:text-primary-accent transition-colors duration-300">Services</a>
+                <a href="#about" class="text-text-light hover:text-primary-accent transition-colors duration-300">About Us</a>
+                <a href="#testimonials" class="text-text-light hover:text-primary-accent transition-colors duration-300">Testimonials</a>
+                <a href="#contact" class="text-text-light hover:text-primary-accent transition-colors duration-300">Contact</a>
+            </nav>
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="tel:__PHONE_RAW__" class="btn-primary text-sm flex items-center" aria-label="Call us">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    Call: __PHONE__
+                </a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 cursor-pointer" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+                <span class="block w-6 h-0.5 bg-text-dark mb-1 rounded-md"></span>
+                <span class="block w-6 h-0.5 bg-text-dark mb-1 rounded-md"></span>
+                <span class="block w-6 h-0.5 bg-text-dark rounded-md"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-menu-backdrop" class="mobile-menu-backdrop fixed inset-0 z-40 md:hidden bg-black/40" aria-hidden="true"></div>
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 z-50 md:hidden w-72 shadow-2xl p-6 mobile-menu bg-white">
+            <button id="close-menu-btn" class="absolute top-4 right-4 text-text-dark hover:text-primary-accent">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <nav class="mt-16 flex flex-col space-y-4">
+                <a href="#hero" class="text-xl text-text-dark hover:text-primary-accent transition-colors duration-300">Home</a>
+                <a href="#services" class="text-xl text-text-dark hover:text-primary-accent transition-colors duration-300">Services</a>
+                <a href="#about" class="text-xl text-text-dark hover:text-primary-accent transition-colors duration-300">About Us</a>
+                <a href="#testimonials" class="text-xl text-text-dark hover:text-primary-accent transition-colors duration-300">Testimonials</a>
+                <a href="#contact" class="text-xl text-text-dark hover:text-primary-accent transition-colors duration-300">Contact</a>
+                <a href="tel:__PHONE_RAW__" class="btn-primary text-center mt-4">Call: __PHONE__</a>
+            </nav>
+        </div>
+    </div>
+
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="relative h-screen flex items-center justify-center text-center p-4" style="background-image: url('https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=1200&q=80'); background-size: cover; background-position: center;">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <div class="relative z-10 px-4">
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">Reliable Plumbing Services, Whenever You Need Us</h1>
+                <p class="text-xl lg:text-2xl text-clouds mb-8 max-w-3xl mx-auto">Expert solutions for all your residential and commercial plumbing needs. Fast, efficient, and trustworthy.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#contact" class="btn-primary text-lg">Get a Free Quote</a>
+                    <a href="#services" class="btn-secondary text-lg">View Our Services</a>
+                </div>
+                <div class="mt-8 text-sm font-medium text-clouds flex flex-wrap justify-center gap-6 sm:gap-8">
+                    <span>15+ Years Experience</span>
+                    <span>500+ Happy Customers</span>
+                    <span>24/7 Available</span>
+                    <span>Licensed & Insured</span>
+                    <span>Satisfaction Guaranteed</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Menu/Grid -->
+        <section id="services" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+            <div class="container mx-auto">
+                <h2 class="text-4xl text-center font-bold mb-12 scroll-animate">Our Expert Plumbing Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <div class="card p-6 scroll-animate scroll-animate-delay-1">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Leak Detection & Repair</h3>
+                        <p class="text-text-light text-sm mb-4">Pinpointing and fixing leaks promptly to prevent water damage.</p>
+                        <a href="#contact" class="text-primary-accent font-semibold hover:underline">Learn More</a>
+                    </div>
+
+                    <div class="card p-6 scroll-animate scroll-animate-delay-2">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v20M4 8h16M4 12h16M4 16h16"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Drain Cleaning</h3>
+                        <p class="text-text-light text-sm mb-4">Clearing blockages for smooth water flow and system efficiency.</p>
+                        <a href="#contact" class="text-primary-accent font-semibold hover:underline">Learn More</a>
+                    </div>
+
+                    <div class="card p-6 scroll-animate scroll-animate-delay-3">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Water Heater Services</h3>
+                        <p class="text-text-light text-sm mb-4">Installation, repair, and maintenance for all types of water heaters.</p>
+                        <a href="#contact" class="text-primary-accent font-semibold hover:underline">Learn More</a>
+                    </div>
+
+                    <div class="card p-6 scroll-animate scroll-animate-delay-4">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16v16H4z"/><path d="M9 9h6v6H9z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Pipe Replacement</h3>
+                        <p class="text-text-light text-sm mb-4">Upgrading old pipes to prevent future issues and improve water quality.</p>
+                        <a href="#contact" class="text-primary-accent font-semibold hover:underline">Learn More</a>
+                    </div>
+
+                    <div class="card p-6 scroll-animate scroll-animate-delay-5">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83M12 8a4 4 0 1 2 0 8 4 4 0 0 2 0-8z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Fixture Installation</h3>
+                        <p class="text-text-light text-sm mb-4">Professional installation of faucets, toilets, sinks, and more.</p>
+                        <a href="#contact" class="text-primary-accent font-semibold hover:underline">Learn More</a>
+                    </div>
+
+                    <div class="card p-6 scroll-animate scroll-animate-delay-6">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v20M2 12h20M4 4l8 8M4 20l8-8M20 4l-8 8M20 20l-8-8"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Sewer Line Services</h3>
+                        <p class="text-text-light text-sm mb-4">Diagnosing and resolving issues with main sewer lines.</p>
+                        <a href="#contact" class="text-primary-accent font-semibold hover:underline">Learn More</a>
+                    </div>
+
+                    <div class="card p-6 scroll-animate scroll-animate-delay-7">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Emergency Plumbing</h3>
+                        <p class="text-text-light text-sm mb-4">Rapid response for urgent plumbing crises 24/7.</p>
+                        <a href="#contact" class="text-primary-accent font-semibold hover:underline">Learn More</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us / Why Choose Us Section -->
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-bg-subtle">
+            <div class="container mx-auto flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2 scroll-animate-left">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80" alt="Professional plumber at work" class="rounded-lg shadow-xl w-full h-auto object-cover" loading="lazy">
+                </div>
+                <div class="lg:w-1/2 text-center lg:text-left scroll-animate-right">
+                    <h2 class="text-4xl font-bold mb-6">Why Choose __BUSINESS_NAME__?</h2>
+                    <p class="mb-4 text-lg">We are a team of dedicated, licensed, and experienced plumbing professionals committed to providing unparalleled service. We understand that plumbing issues can be stressful, which is why we focus on clear communication, timely service, and lasting solutions.</p>
+                    <p class="mb-6 text-lg">Our mission is to be your trusted partner for all plumbing needs, offering reliability, expertise, and exceptional value. From minor repairs to major installations, we approach every job with the same dedication to quality and customer satisfaction.</p>
+                    <div class="flex justify-center lg:justify-start space-x-4">
+                         <a href="#contact" class="btn-primary text-lg">Get a Free Quote</a>
+                         <a href="#services" class="btn-secondary text-lg">Our Services</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof / Testimonials -->
+        <section id="testimonials" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+            <div class="container mx-auto">
+                <h2 class="text-4xl text-center font-bold mb-12 scroll-animate">What Our Clients Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <div class="card p-6 scroll-animate scroll-animate-delay-1">
+                        <div class="flex mb-4">
+                            <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+                        </div>
+                        <p class="italic text-text-light mb-4 text-lg">"Absolutely fantastic service! __BUSINESS_NAME__ came out within an hour during a major leak crisis. Professional, efficient, and solved the problem quickly. Highly recommend!"</p>
+                        <p class="font-semibold text-text-dark">John D., Johannesburg</p>
+                    </div>
+
+                    <div class="card p-6 scroll-animate scroll-animate-delay-2">
+                        <div class="flex mb-4">
+                            <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+                        </div>
+                        <p class="italic text-text-light mb-4 text-lg">"We recently had our water heater replaced, and the team at __BUSINESS_NAME__ did an amazing job. They were knowledgeable, clean, and explained everything thoroughly. Great value!"</p>
+                        <p class="font-semibold text-text-dark">Sarah K., Cape Town</p>
+                    </div>
+
+                    <div class="card p-6 scroll-animate scroll-animate-delay-3">
+                        <div class="flex mb-4">
+                            <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+                        </div>
+                        <p class="italic text-text-light mb-4 text-lg">"Prompt and reliable service. They cleared a stubborn drain blockage that others couldn't. Very impressed with their professionalism and results."</p>
+                        <p class="font-semibold text-text-dark">Michael P., Durban</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Lead Capture / Contact Form -->
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-subtle) 100%);">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-center lg:text-left scroll-animate-left">
+                        <h2 class="text-4xl font-bold mb-6">Get a Free Quote Today</h2>
+                        <p class="text-text-light text-lg mb-8 max-w-lg mx-auto lg:mx-0">Don't let plumbing problems disrupt your day. Fill out the form or call us directly for prompt and reliable service.</p>
+                        <div class="flex flex-col sm:flex-row lg:flex-col justify-center lg:justify-start gap-6">
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-primary-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.78 19.78 0 0 1-10.44 0 2 2 0 0 1-1.82-2.3z"></path>
+                                    <path d="M8 3v3a2 2 0 0 0 2 2h.69c.895 0 1.542.46 2.083 1.147M4 16.5v-2.94a2.25 2.25 0 0 1 2.25-2.25h.137v12.47H4a2.25 2.25 0 0 1-2.25-2.25z"></path>
+                                    <path d="M9.25 22H4.5a2.25 2.25 0 0 1-2.25-2.25V16.5a2.25 2.25 0 0 1 2.25-2.25h4.75"></path>
+                                </svg>
+                                <div>
+                                    <p class="text-text-light">Call Us Anytime</p>
+                                    <a href="tel:__PHONE_RAW__" class="text-2xl font-bold text-text-dark hover:text-primary-accent">__PHONE__</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-4 text-primary-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"></path>
+                                    <path d="M21 15H3"></path>
+                                    <path d="M17 15v-3l-3-3"></path>
+                                    <path d="M7 12v3l3 3"></path>
+                                </svg>
+                                <div>
+                                    <p class="text-text-light">Email Us</p>
+                                    <a href="mailto:__EMAIL__" class="text-2xl font-bold text-text-dark break-all hover:text-primary-accent">__EMAIL__</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 sm:p-10 rounded-xl shadow-xl scroll-animate-right">
+                        <form id="contact-form" action="/quote/request/__SITE_SLUG__" method="post" class="contact-form">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="first_name" class="block text-sm font-medium text-text-light mb-2">First Name *</label>
+                                    <input type="text" id="first_name" name="first_name" class="input-field" placeholder="John" required>
+                                </div>
+                                <div>
+                                    <label for="last_name" class="block text-sm font-medium text-text-light mb-2">Last Name *</label>
+                                    <input type="text" id="last_name" name="last_name" class="input-field" placeholder="Doe" required>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="email" class="block text-sm font-medium text-text-light mb-2">Email *</label>
+                                    <input type="email" id="email" name="email" class="input-field" placeholder="john@example.com" required>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="phone" class="block text-sm font-medium text-text-light mb-2">Phone</label>
+                                    <input type="tel" id="phone" name="phone" class="input-field" placeholder="+27 12 345 6789">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="service" class="block text-sm font-medium text-text-light mb-2">Service Needed</label>
+                                    <select id="service" name="service" class="input-field">
+                                        <option value="">Select a service</option>
+                                        <option value="Leak Detection & Repair">Leak Detection & Repair</option>
+                                        <option value="Drain Cleaning">Drain Cleaning</option>
+                                        <option value="Water Heater Services">Water Heater Services</option>
+                                        <option value="Pipe Replacement">Pipe Replacement</option>
+                                        <option value="Fixture Installation">Fixture Installation</option>
+                                        <option value="Sewer Line Services">Sewer Line Services</option>
+                                        <option value="Emergency Plumbing">Emergency Plumbing</option>
+                                    </select>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="message" class="block text-sm font-medium text-text-light mb-2">Message *</label>
+                                    <textarea id="message" name="message" rows="4" class="input-field resize-none" placeholder="Tell us about your plumbing needs..." required></textarea>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="flex items-start gap-2 cursor-pointer">
+                                        <input type="checkbox" name="newsletter" value="on" class="mt-1 rounded border-gray-300">
+                                        <span class="text-sm text-text-light">Subscribe to our newsletter for plumbing tips and special offers</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary w-full mt-6 text-lg">Send Request</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-16 px-4 sm:px-6 lg:px-8 bg-text-dark text-clouds">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div>
+                <div class="text-2xl font-bold mb-4">__BUSINESS_NAME__</div>
+                <p class="text-sm text-text-light">Your trusted partner for all plumbing emergencies and routine maintenance.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="#hero" class="text-text-light hover:text-white transition-colors duration-300">Home</a></li>
+                    <li><a href="#services" class="text-text-light hover:text-white transition-colors duration-300">Services</a></li>
+                    <li><a href="#about" class="text-text-light hover:text-white transition-colors duration-300">About Us</a></li>
+                    <li><a href="#testimonials" class="text-text-light hover:text-white transition-colors duration-300">Testimonials</a></li>
+                    <li><a href="#contact" class="text-text-light hover:text-white transition-colors duration-300">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4">Contact Info</h4>
+                <ul class="space-y-2">
+                                    <li class="text-text-light">__ADDRESS__</li>
+                                    <li class="text-text-light"><a href="tel:__PHONE_RAW__" class="hover:text-white">__PHONE__</a></li>
+                    <li class="text-text-light break-all"><a href="mailto:__EMAIL__" class="hover:text-white">__EMAIL__</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Facebook" class="hover:text-white transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 12.075c0-7.178-5.793-12.925-12.925-12.925C5.793 0 0 5.747 0 12.075 0 17.038 3.54 21.248 8.197 22.446v-7.787h-3.626v-4.844h3.626V10.4c0-3.58 2.177-5.57 5.414-5.57 1.584 0 3.03.304 3.437.43v4.907H15.907c-1.76.002-2.001.817-2.001 1.966v2.965h4.336l-.572 4.844H12.005v7.787C16.46 21.471 24 17.115 24 12.075z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Twitter" class="hover:text-white transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.867.384-1.797.636-2.781.752-1.004-.647-1.779-1.598-2.159-2.731-.797.471-1.663.813-2.585 1.007-.755.393-1.557.607-2.395.607-.948 0-1.878-.212-2.752-.607-.874-1.028-1.65-1.979-2.159-2.731-.455.969-.797 2.013-1.007 3.168-.212.973-.283 1.99-.283 3.021 0 1.797.471 3.541 1.395 5.145-.874.347-1.694.588-2.575.752-1.004.212-2.087.304-3.23.304-1.147 0-2.177-.092-3.23-.283-1.063-.797-1.99-1.732-2.585-2.731.55.969 1.275 1.705 2.159 2.109-.813-.092-1.604-.245-2.395-.432v.046c0 1.797 1.275 3.493 2.97 3.953-.69.184-1.426.283-2.177.283-.43 0-.858-.046-1.275-.138.813 2.585 3.159 4.414 5.829 4.414-2.177 1.705-4.948 2.704-8.019 2.704-.517 0-1.034-.046-1.557-.092 2.752.987 5.829 1.557 9.243 1.557 11.097 0 17.167-9.177 17.167-17.167v-.797c.69-.471 1.275-1.055 1.747-1.705z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="hover:text-white transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 0H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-7.354 13.296v-6.265h-2.71v6.265h2.71zm-3.03-8.158c-1.193 0-2.159-.966-2.159-2.159 0-1.193.966-2.159 2.159-2.159s2.159.966 2.159 2.159-.966 2.159-2.159 2.159zm.513 8.158h2.71V7.731h-2.71v6.265z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-sm text-text-light mt-12">
+            © <span id="year"></span> __BUSINESS_NAME__. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/__WHATSAPP__?text=Hi%2C%20I%20need%20a%20plumbing%20quote" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300" aria-label="Chat on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.getElementById('navbar');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const scrollProgress = document.getElementById('scroll-progress');
+
+            // Sticky Navbar Logic
+            const headerHeight = navbar.offsetHeight;
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > headerHeight) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+
+                // Scroll Progress Bar
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercentage = (scrollTop / docHeight) * 100;
+                scrollProgress.style.width = scrollPercentage + '%';
+            });
+
+            const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+
+            // Mobile Menu Toggle
+            function openMobileMenu() {
+                mobileMenu.classList.add('open');
+                mobileMenuBackdrop.classList.add('open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('open');
+                mobileMenuBackdrop.classList.remove('open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+
+            mobileMenuBtn.addEventListener('click', openMobileMenu);
+            closeMenuBtn.addEventListener('click', closeMobileMenu);
+            mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+
+            // Smooth Scrolling for Anchor Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const offset = headerHeight + 20; // Adjust offset for header height and some spacing
+                        window.scrollTo({
+                            top: targetElement.offsetTop - offset,
+                            behavior: 'smooth'
+                        });
+                        if (mobileMenu.classList.contains('open')) {
+                            closeMobileMenu();
+                        }
+                    }
+                });
+            });
+
+            // Form submit feedback
+            const contactForm = document.getElementById('contact-form');
+            const submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
+            if (contactForm && submitBtn) {
+                contactForm.addEventListener('submit', function() {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Sending…';
+                });
+            }
+
+            // Dynamic year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Scroll animations with Intersection Observer
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!prefersReducedMotion) {
+                const animatedElements = document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-in');
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+                animatedElements.forEach(el => observer.observe(el));
+            } else {
+                document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right').forEach(el => el.classList.add('animate-in'));
+            }
+        });
+    </script>
+</body>
+</html>

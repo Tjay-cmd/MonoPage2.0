@@ -22,10 +22,10 @@ export default async function NewQuotePage({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("plan")
+    .select("plan, is_admin")
     .eq("id", user.id)
     .single();
-  if (profile?.plan !== "pro") redirect(`/dashboard/${niche}/subscription`);
+  if (profile?.plan !== "pro" && !profile?.is_admin) redirect(`/dashboard/${niche}/subscription`);
 
   const { data: sites } = await supabase
     .from("user_sites")

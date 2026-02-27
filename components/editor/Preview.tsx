@@ -43,21 +43,43 @@ ${html}
 </html>`);
 }
 
+type Placeholders = {
+  businessName: string;
+  phone: string;
+  phoneRaw: string;
+  email: string;
+  address: string;
+  addressEnc: string;
+  whatsapp: string;
+  mapEmbed: string;
+};
+
 export default function Preview({
   html,
   css,
   js,
   userSiteId,
+  placeholders,
 }: {
   html: string;
   css: string;
   js: string;
   userSiteId?: string;
+  placeholders?: Placeholders;
 }) {
-  // In editor preview, inject slug placeholder so form works. Drafts use preview:userSiteId.
   let processedHtml = html;
   if (userSiteId) {
-    processedHtml = html.replace(/__SITE_SLUG__/g, `preview:${userSiteId}`);
+    processedHtml = processedHtml.replace(/__SITE_SLUG__/g, `preview:${userSiteId}`);
+  }
+  if (placeholders) {
+    processedHtml = processedHtml.replace(/__BUSINESS_NAME__/g, placeholders.businessName);
+    processedHtml = processedHtml.replace(/__PHONE__/g, placeholders.phone);
+    processedHtml = processedHtml.replace(/__PHONE_RAW__/g, placeholders.phoneRaw);
+    processedHtml = processedHtml.replace(/__EMAIL__/g, placeholders.email);
+    processedHtml = processedHtml.replace(/__ADDRESS__/g, placeholders.address);
+    processedHtml = processedHtml.replace(/__ADDRESS_ENC__/g, placeholders.addressEnc);
+    processedHtml = processedHtml.replace(/__WHATSAPP__/g, placeholders.whatsapp);
+    processedHtml = processedHtml.replace(/__MAP_EMBED__/g, placeholders.mapEmbed);
   }
   const srcDoc = buildSrcDoc(processedHtml, css, js);
 

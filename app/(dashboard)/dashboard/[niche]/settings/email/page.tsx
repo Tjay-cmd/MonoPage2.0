@@ -19,12 +19,12 @@ export default async function EmailSettingsPage({
   const { data: profile } = await supabase
     .from("profiles")
     .select(
-      "plan, business_name, email_logo_url, email_brand_color, email_footer_text"
+      "plan, is_admin, business_name, email_logo_url, email_brand_color, email_footer_text"
     )
     .eq("id", user.id)
     .single();
 
-  if (profile?.plan !== "pro") {
+  if (profile?.plan !== "pro" && !profile?.is_admin) {
     return (
       <div className="p-8 max-w-2xl">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Email Design</h1>

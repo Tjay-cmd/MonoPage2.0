@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "app/api/editor/ai/route.ts": {
+      "maxDuration": 120
+    }
+  }
+}
